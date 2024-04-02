@@ -15,6 +15,10 @@ class StockTableViewCell: UITableViewCell {
     private var price = UILabel(textColor: .white, font: UIFont.systemFont(ofSize: 22))
     var changeInPercentage = UILabel(textColor: .white, font: UIFont.systemFont(ofSize: 13))
     
+    override func awakeFromNib() {
+        super.awakeFromNib()
+    }
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         constraints()
@@ -35,16 +39,16 @@ class StockTableViewCell: UITableViewCell {
         tickerAndNameStack.translatesAutoresizingMaskIntoConstraints = false
         priceAndChangeStack.translatesAutoresizingMaskIntoConstraints = false
         
-        addSubview(cellView)
+        contentView.addSubview(cellView)
         cellView.addSubview(tickerAndNameStack)
         cellView.addSubview(priceAndChangeStack)
         
         NSLayoutConstraint.activate([
-            cellView.topAnchor.constraint(equalTo: topAnchor, constant: 10),
-            cellView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10),
-            cellView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
-            cellView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
-            cellView.centerYAnchor.constraint(equalTo: centerYAnchor)
+            cellView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
+            cellView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10),
+            cellView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
+            cellView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10),
+            cellView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor)
         ])
         
         NSLayoutConstraint.activate([

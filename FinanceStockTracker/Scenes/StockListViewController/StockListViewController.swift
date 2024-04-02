@@ -71,13 +71,14 @@ class StockListViewController: UIViewController {
             activityIndicator.stopAnimating()
         }
         
+        tableView.allowsFocusDuringEditing = true
         tableView.refreshControl = refreshControl
-        tableView.allowsSelection = false
-        tableView.delegate = self
         tableView.dataSource = self
+        tableView.delegate = self
         tableView.backgroundColor = .clear
         tableView.separatorStyle = .none
         tableView.rowHeight = 94
+        
         
     }
     
@@ -193,8 +194,8 @@ class StockListViewController: UIViewController {
     }
 }
 
-// MARK: - Table view data source
-extension StockListViewController: UITableViewDataSource {
+// MARK: - Table view data source & delegate
+extension StockListViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         viewModel.stocks.count
     }
@@ -212,16 +213,13 @@ extension StockListViewController: UITableViewDataSource {
         return cell
     }
     
-    
-}
-
-extension StockListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             viewModel.deleteStock(at: indexPath.row)
-            tableView.deleteRows(at: [indexPath], with: .automatic)
+            tableView.deleteRows(at: [indexPath], with: .fade)
         }
-        
-        
     }
+    
+    
 }
+
