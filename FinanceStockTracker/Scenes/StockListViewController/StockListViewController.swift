@@ -152,6 +152,14 @@ class StockListViewController: UIViewController {
     }
     
     private func addStockToTableView(ticker: String) {
+        
+        Timer.scheduledTimer(withTimeInterval: 5, repeats: false) { [unowned self] _ in
+            if self.activityIndicator.isAnimating {
+                self.activityIndicator.stopAnimating()
+                self.showAddAlert(with: "Timeout", and: "Failed to add stock. Please try again.")
+            }
+        }
+        
         viewModel.addStock(ticker: ticker) { [unowned self] error in
             if error == nil {
                 showAddAlert(with: "Invalid ticker", and: "Please try again")
@@ -219,7 +227,5 @@ extension StockListViewController: UITableViewDataSource, UITableViewDelegate {
             tableView.deleteRows(at: [indexPath], with: .fade)
         }
     }
-    
-    
 }
 
