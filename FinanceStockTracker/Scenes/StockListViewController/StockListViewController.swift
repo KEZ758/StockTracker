@@ -32,6 +32,8 @@ class StockListViewController: UIViewController {
         tableViewSetup()
         setupNavigationBar()
         constraints()
+//        print(viewModel.tickers)
+        
     }
     
     @objc private func addButtonPressed(_ sender: Any) {
@@ -71,7 +73,7 @@ class StockListViewController: UIViewController {
             activityIndicator.stopAnimating()
         }
         
-        tableView.allowsFocusDuringEditing = true
+        tableView.allowsSelection = false
         tableView.refreshControl = refreshControl
         tableView.dataSource = self
         tableView.delegate = self
@@ -227,5 +229,7 @@ extension StockListViewController: UITableViewDataSource, UITableViewDelegate {
             tableView.deleteRows(at: [indexPath], with: .fade)
         }
     }
+    
+    
 }
 
